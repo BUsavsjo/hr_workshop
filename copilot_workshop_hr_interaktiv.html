@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>60 min workshop: Copilot för HR</title>
+<style>
+:root{--navy:#071a3d;--blue:#155eef;--green:#0f7a35;--yellow:#a66a00;--red:#b42318;--border:#d0d5dd;--bg:#f7f9fc}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Segoe UI,system-ui,sans-serif;background:linear-gradient(#fff,#f7f9fc);color:#101828;line-height:1.5}
+.progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--blue),#6f35c4);width:0;z-index:99}
+nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid #eaecf0}
+.navin{max-width:1180px;margin:auto;padding:10px 18px;display:flex;justify-content:space-between;gap:12px;align-items:center}.brand{font-weight:950;color:var(--navy)}
+.links{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.links a{text-decoration:none;border:1px solid #dbe4ff;border-radius:999px;padding:7px 10px;font-weight:800;font-size:.86rem;color:var(--navy)}
+main{max-width:1180px;margin:auto;padding:20px 18px 80px}.slide{min-height:calc(100vh - 68px);display:flex;align-items:center;border-bottom:1px solid #eaecf0;padding:42px 0}.inner{width:100%}
+h1{font-size:clamp(2.4rem,6vw,5.4rem);line-height:.97;margin:0 0 18px;color:var(--navy);letter-spacing:-.055em}h2{font-size:clamp(2rem,4vw,3.1rem);line-height:1.05;margin:0 0 18px;color:var(--navy);letter-spacing:-.04em}h3{margin:0 0 8px;color:var(--navy)}
+p{margin:0;color:#344054}.lead{font-size:1.25rem;max-width:860px}.eyebrow{display:inline-flex;color:var(--blue);background:#eef5ff;border:1px solid #c7dcff;border-radius:999px;padding:6px 12px;font-weight:900;margin-bottom:16px}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center}.dark{background:linear-gradient(135deg,#071a3d,#102f66);border-radius:30px;padding:28px;color:white;box-shadow:0 18px 50px rgba(7,26,61,.18)}.dark p,.dark li{color:#e7efff}.dark h2,.dark h3{color:white}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card{background:white;border:1px solid var(--border);border-radius:24px;padding:22px;box-shadow:0 10px 26px rgba(16,24,40,.055)}.green{background:#edf8f0;border-color:#b7e4c5}.yellow{background:#fff7e6;border-color:#fedf89}.red{background:#fff1f0;border-color:#fecdca}.blue{background:#eef5ff;border-color:#c7dcff}.purple{background:#f5efff;border-color:#dbc8ff}
+.pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.pill{background:white;border:1px solid #eaecf0;border-radius:999px;padding:8px 12px;font-weight:850}.pill.b{color:var(--blue);background:#eef5ff}.pill.g{color:var(--green);background:#edf8f0}.pill.y{color:var(--yellow);background:#fff7e6}.pill.r{color:var(--red);background:#fff1f0}
+.agenda{display:grid;gap:12px;margin-top:16px}.row{display:grid;grid-template-columns:80px 1fr;gap:12px;background:white;border:1px solid var(--border);border-radius:18px;padding:14px}.time{font-weight:950;color:var(--blue);background:#eef5ff;border-radius:12px;text-align:center;padding:7px}
+.qboard{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}.q{background:white;border:1px solid var(--border);border-radius:22px;padding:20px;cursor:pointer}.q input{display:none}.q label{display:block;font-size:1.15rem;font-weight:950;color:var(--navy)}.ans{display:none;margin-top:10px;border-top:1px solid #eaecf0;padding-top:10px;color:#475467}.q:has(input:checked){background:#eef5ff;border-color:var(--blue)}.q:has(input:checked) .ans{display:block}
+.prompt{background:#0b1220;color:#e7efff;border-radius:20px;padding:18px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;font-size:.92rem}.copy{margin-top:10px;border:0;border-radius:999px;background:var(--blue);color:white;font-weight:900;padding:10px 14px;cursor:pointer}
+.traffic{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}.traffic .card{position:relative;overflow:hidden}.traffic .card:before{content:"";position:absolute;left:0;top:0;right:0;height:8px}.traffic .green:before{background:var(--green)}.traffic .yellow:before{background:#eaaa08}.traffic .red:before{background:var(--red)}
+ul{margin:10px 0 0;padding-left:22px;color:#475467}li{margin:6px 0}.note{border-left:8px solid var(--blue);background:white;border-radius:20px;padding:18px;margin-top:18px;box-shadow:0 8px 22px rgba(16,24,40,.05)}
+details{background:white;border:1px solid var(--border);border-radius:20px;padding:16px;margin-top:12px}summary{font-weight:950;color:var(--navy);cursor:pointer}
+.sourcecards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}.sourcecards a{text-decoration:none;background:white;border:1px solid var(--border);border-radius:20px;padding:16px;box-shadow:0 8px 22px rgba(16,24,40,.05)}.sourcecards strong{display:block;color:var(--navy)}.sourcecards span{color:#475467;font-size:.9rem}
+.controls{position:fixed;right:18px;bottom:18px;display:flex;gap:8px}.controls button{border:0;background:var(--navy);color:white;border-radius:999px;padding:11px 14px;font-weight:950;box-shadow:0 10px 30px rgba(7,26,61,.22)}
+@media(max-width:900px){.hero,.grid2{grid-template-columns:1fr}.grid3,.grid4,.sourcecards,.traffic{grid-template-columns:1fr 1fr}.qboard{grid-template-columns:1fr}}@media(max-width:620px){.grid3,.grid4,.sourcecards,.traffic{grid-template-columns:1fr}.links{display:none}.slide{min-height:auto}.row{grid-template-columns:1fr}}
+@media print{nav,.controls,.progress{display:none}.slide{min-height:auto;break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<nav><div class="navin"><div class="brand">Copilot-workshop för HR</div><div class="links"><a href="#agenda">Agenda</a><a href="#nulage">Nuläge</a><a href="#case">HR-case</a><a href="#safe">Säkra val</a><a href="#prompts">Prompts</a><a href="#links">Länkar</a></div></div></nav>
+<main>
+<section class="slide" id="intro"><div class="inner hero"><div><div class="eyebrow">60 min • Copilot 365 • HR</div><h1>Copilot som praktiskt stöd i HR-arbetet</h1><p class="lead">Målet är att hitta trygga användningsområden där Copilot kan spara tid, förbättra språk och struktur och samtidigt användas med respekt för personuppgifter, sekretess och HR-professionens bedömning.</p><div class="pills"><span class="pill b">Prompta bättre</span><span class="pill g">Börja säkert</span><span class="pill y">Granska alltid</span><span class="pill r">Låt inte AI besluta</span></div></div><aside class="dark"><h2>Röd tråd</h2><ul><li>Nuläge: vad använder HR redan AI till?</li><li>Nytta: var finns lågt hängande frukt?</li><li>Risk: vad är grönt, gult och rött i HR?</li><li>Praktik: skriv, granska och förbättra prompts.</li></ul></aside></div></section>
+
+<section class="slide" id="agenda"><div class="inner"><div class="eyebrow">Körschema</div><h2>60 minuter med tydligt resultat</h2><p class="lead">Deltagarna ska lämna med tre säkra användningsfall, två prompts de kan testa direkt och en gemensam tumregel för vad HR inte ska mata in i AI.</p><div class="agenda">
+<div class="row"><div class="time">0-5</div><div><h3>Start och förväntningar</h3><p>Syfte, spelregler och varför HR behöver vara extra noga.</p></div></div>
+<div class="row"><div class="time">5-13</div><div><h3>Nulägescheck</h3><p>Handuppräckning och korta exempel från deltagarna.</p></div></div>
+<div class="row"><div class="time">13-20</div><div><h3>AI på 7 minuter</h3><p>Vad Copilot är bra på, vad den är svagare på och varför mänsklig granskning behövs.</p></div></div>
+<div class="row"><div class="time">20-30</div><div><h3>HR-case</h3><p>Textutkast, klarspråk, rekrytering, onboarding, rutiner och mötessammanfattningar.</p></div></div>
+<div class="row"><div class="time">30-40</div><div><h3>Säkra val</h3><p>Grönt, gult och rött: vad kan vi göra, vad kräver omdöme, vad ska vi undvika?</p></div></div>
+<div class="row"><div class="time">40-53</div><div><h3>Promptövning</h3><p>Deltagarna förbättrar en prompt och testar kontrollfrågor.</p></div></div>
+<div class="row"><div class="time">53-60</div><div><h3>Avslut</h3><p>Gemensam checklista: börja smått, granska, dokumentera och följ lokala riktlinjer.</p></div></div>
+</div></div></section>
+
+<section class="slide" id="nulage"><div class="inner"><div class="eyebrow">Interaktiv start</div><h2>Var är HR-gruppen idag?</h2><p class="lead">Klicka på korten för talarstöd.</p><div class="qboard">
+<article class="q"><input id="q1" type="checkbox"><label for="q1">Har ni testat AI privat?</label><p>Resa, text, recept, sammanfattning?</p><div class="ans">Privat användning ger en känsla för verktyget, men HR-data kräver andra spelregler.</div></article>
+<article class="q"><input id="q2" type="checkbox"><label for="q2">Har ni testat AI i jobbet?</label><p>Mejl, dokument, möten, policys?</p><div class="ans">Fråga: vad fungerade, vad kändes riskabelt, vad vågade ni inte testa?</div></article>
+<article class="q"><input id="q3" type="checkbox"><label for="q3">Vad tar mest tid i HR?</label><p>Text, samordning, uppföljning, frågor?</p><div class="ans">Lyssna efter friktion: tomma dokument, långa mejltrådar, otydliga rutiner, många målgrupper.</div></article>
+<article class="q"><input id="q4" type="checkbox"><label for="q4">Vad vill vi absolut inte riskera?</label><p>Integritet, förtroende, felaktiga beslut, sekretess.</p><div class="ans">Sätt ramen: Copilot är stöd för struktur och språk, inte beslutsfattare i HR-frågor.</div></article>
+</div></div></section>
+
+<section class="slide"><div class="inner grid2"><div><div class="eyebrow">AI på 7 minuter</div><h2>Copilot är ett arbetsstöd, inte en HR-specialist</h2><p class="lead">Copilot är starkt på språk, sammanfattning, struktur och alternativa formuleringar. Det är svagare när svaret kräver lokal policy, juridisk precision, mänsklig kontext eller bedömning av en person.</p><div class="note"><h3>Tre begrepp att lära gruppen</h3><ul><li><b>Fakta:</b> sådant som kan kontrolleras mot källa.</li><li><b>Antaganden:</b> sådant AI fyller i när information saknas.</li><li><b>Omdöme:</b> HR:s professionella bedömning, relationer och lokala kunskap.</li></ul></div></div><aside class="card yellow"><h3>Alternativt perspektiv</h3><p>AI kan spara tid, men kan också skapa extra granskningsarbete om vi använder den på fel saker. Använd Copilot där resultatet enkelt kan granskas.</p><details><summary>Talarstöd</summary><p>“Vi ska inte fråga: kan AI göra detta? Vi ska fråga: kan AI göra ett utkast som vi snabbt och säkert kan kvalitetssäkra?”</p></details></aside></div></section>
+
+<section class="slide" id="case"><div class="inner"><div class="eyebrow">Lågt hängande frukt för HR</div><h2>Stor nytta, låg tröskel</h2><div class="grid3">
+<article class="card green"><h3>Mejl och kommunikation</h3><p>Första utkast, ton, kortare text och versioner för chef, medarbetare och intranät.</p></article>
+<article class="card blue"><h3>Policy och rutin</h3><p>Klarspråk, FAQ, sammanfattningar och checklistor av redan beslutade dokument.</p></article>
+<article class="card purple"><h3>Onboarding</h3><p>Välkomstbrev, introduktionsplaner, checklistor och guider för nya medarbetare.</p></article>
+<article class="card yellow"><h3>Kompetensutveckling</h3><p>Utbildningsupplägg, reflektionsfrågor och sammanställningar på generell nivå.</p></article>
+<article class="card blue"><h3>Möten</h3><p>Beslut, ansvar och nästa steg när materialet är lämpligt att hantera i verktyget.</p></article>
+<article class="card red"><h3>Rekrytering med gränser</h3><p>Annonsutkast och intervjufrågor. Undvik AI-rangordning eller bedömning av kandidater.</p></article>
+</div><details><summary>Miniövning: välj tre startfall</summary><p>Låt deltagarna markera tre användningsfall. Prioritera sådant som är textbaserat, generellt och lätt att granska.</p></details></div></section>
+
+<section class="slide" id="safe"><div class="inner"><div class="eyebrow">Dataskydd, sekretess och förtroende</div><h2>Grönt, gult och rött för HR</h2><p class="lead">HR hanterar ofta uppgifter där fel användning kan skada både individ och organisation. Börja där nyttan är tydlig och risken är låg.</p><div class="traffic">
+<article class="card green"><h3>Grön = bra att börja med</h3><ul><li>Fiktiva exempel</li><li>Offentliga eller beslutade texter</li><li>Generella mallar och checklistor</li><li>Klarspråk och målgruppsanpassning</li><li>Utbildningsmaterial utan personuppgifter</li></ul></article>
+<article class="card yellow"><h3>Gul = använd omdöme</h3><ul><li>Interna utkast</li><li>Avidentifierade HR-case</li><li>Mötesanteckningar utan känsliga uppgifter</li><li>Rekryteringsmaterial utan kandidatuppgifter</li><li>Aggregerad enkät- eller statistiktext</li></ul></article>
+<article class="card red"><h3>Röd = undvik</h3><ul><li>Rehab, hälsa och arbetsanpassning</li><li>Disciplinärenden och konflikter</li><li>Facklig tillhörighet</li><li>Skyddade personuppgifter</li><li>Personakter, lönesamtal och skarpa kandidatuppgifter</li><li>AI som beslutsfattare eller rangordnare</li></ul></article>
+</div><div class="note"><h3>Tumregel</h3><p><b>Använd AI som stöd för språk och struktur. Använd inte AI som mottagare av känsliga HR-uppgifter eller som beslutsfattare om människor.</b></p></div></div></section>
+
+<section class="slide" id="prompts"><div class="inner"><div class="eyebrow">Promptövning</div><h2>Från svag prompt till användbar prompt</h2><div class="grid2"><div class="card red"><h3>Svag prompt</h3><div class="prompt">Skriv en bra text om vår nya rutin.</div><p style="margin-top:12px">Problem: otydligt syfte, målgrupp, ton, material, format och kontrollnivå.</p></div><div class="card green"><h3>Bättre prompt</h3><div class="prompt" id="prompt1">Agera som ett skrivstöd för HR. Skriv ett första utkast till ett informationsmeddelande om en ny rutin.
+
+Målgrupp: chefer.
+Ton: tydlig, lugn och praktisk.
+Format: rubrik, kort sammanfattning, vad som gäller, vad chefen behöver göra, kontaktväg.
+Begränsning: hitta inte på detaljer. Markera sådant som behöver fyllas i med [kontrollera].</div><button class="copy" onclick="copyPrompt('prompt1')">Kopiera prompt</button></div></div><details><summary>Facilitator: så leder du övningen</summary><p>Låt deltagarna först förbättra prompten i par. Be dem lägga till roll, uppgift, målgrupp, format och begränsningar.</p></details></div></section>
+
+<section class="slide"><div class="inner"><div class="eyebrow">Promptexempel för HR</div><h2>Tre prompts att testa direkt</h2><div class="grid3">
+<article class="card blue"><h3>Klarspråk av HR-text</h3><div class="prompt" id="prompt2">Skriv om texten till klarspråk för medarbetare. Behåll betydelsen, men gör språket kortare och tydligare. Lista också vilka delar som behöver kontrolleras mot aktuell policy.</div><button class="copy" onclick="copyPrompt('prompt2')">Kopiera</button></article>
+<article class="card yellow"><h3>Intervjufrågor</h3><div class="prompt" id="prompt3">Skapa intervjufrågor kopplade till följande kompetenser: [kompetenser]. Frågorna ska vara öppna, relevanta och likvärdiga för alla kandidater. Rangordna inte kandidater och gör ingen bedömning.</div><button class="copy" onclick="copyPrompt('prompt3')">Kopiera</button></article>
+<article class="card green"><h3>Kontroll av HR-utkast</h3><div class="prompt" id="prompt4">Granska detta HR-utkast. Dela upp svaret i: fakta, antaganden, otydligheter, risk för missförstånd och förslag på förbättring. Fatta inga beslut och lägg inte till information som saknas.</div><button class="copy" onclick="copyPrompt('prompt4')">Kopiera</button></article>
+</div></div></section>
+
+<section class="slide"><div class="inner"><div class="eyebrow">Agenter</div><h2>Bygg smalt, testa säkert</h2><p class="lead">En agent är en paketerad arbetsmetod. Den ska ha tydligt syfte, tydliga begränsningar och vara testad på fiktiva eller ofarliga exempel.</p><div class="grid3" style="margin-top:20px"><article class="card green"><h3>HR-klarspråk</h3><p>Gör beslutade HR-texter lättare att förstå.</p></article><article class="card blue"><h3>Onboardingstöd</h3><p>Skapar introduktionsplaner och checklistor.</p></article><article class="card yellow"><h3>Policy-FAQ</h3><p>Gör vanliga frågor och svar av policy.</p></article></div><details><summary>Agentinstruktion: HR-klarspråk</summary><div class="prompt" style="margin-top:12px">Du är ett skrivstöd för HR-kommunikation.
+
+Gör beslutade HR-texter tydligare för målgruppen.
+Behåll saklig betydelse, skapa rubrik, sammanfattning och nästa steg.
+Lista vad som behöver kontrolleras mot policy.
+Du får inte lägga till nya regler, fatta beslut, ge juridisk rådgivning eller behandla känsliga personuppgifter.</div></details></div></section>
+
+<section class="slide"><div class="inner"><div class="eyebrow">Gemensam checklista</div><h2>Innan HR använder ett AI-svar</h2><div class="grid2"><article class="card green"><h3>Kontrollera alltid</h3><ul><li>Är texten sakligt korrekt?</li><li>Stämmer den med lokal policy och beslut?</li><li>Finns personuppgifter eller känsligt innehåll?</li><li>Är målgruppen rätt?</li><li>Finns tydligt ansvar och nästa steg?</li></ul></article><article class="card yellow"><h3>Fråga AI om osäkerhet</h3><div class="prompt" id="prompt5">Lista vilka delar i ditt svar som är fakta, vilka som är antaganden och vilka jag behöver kontrollera mot källa eller lokal policy innan jag använder texten.</div><button class="copy" onclick="copyPrompt('prompt5')">Kopiera kontrollprompt</button></article></div></div></section>
+
+<section class="slide" id="links"><div class="inner"><div class="eyebrow">Länkar att ha nära</div><h2>Källor och kontrollpunkter</h2><p class="lead">Lokala styrdokument gäller alltid före generella exempel i workshopen.</p><div class="sourcecards">
+<a href="https://www.imy.se/verksamhet/dataskydd/innovationsportalen/vagledning-om-gdpr-och-ai/" target="_blank"><strong>IMY</strong><span>Vägledning om GDPR och AI</span></a>
+<a href="https://www.digg.se/ai-for-offentlig-forvaltning/riktlinjer-for-generativ-ai" target="_blank"><strong>Digg/IMY</strong><span>Riktlinjer för generativ AI</span></a>
+<a href="https://learn.microsoft.com/sv-se/microsoft-365/copilot/microsoft-365-copilot-privacy" target="_blank"><strong>Microsoft</strong><span>Data, privacy and security</span></a>
+<a href="https://learn.microsoft.com/sv-se/microsoft-365/copilot/enterprise-data-protection" target="_blank"><strong>Microsoft</strong><span>Enterprise data protection</span></a>
+</div><p style="margin-top:18px;color:#667085">Lägg gärna till egna lokala riktlinjer, informationssäkerhetsklassning och kontaktväg till dataskyddsombud eller informationssäkerhetsansvarig.</p></div></section>
+
+<section class="slide"><div class="inner dark"><h2>Avslutande budskap</h2><p class="lead">Copilot kan bli ett starkt HR-stöd för språk, struktur och första utkast. Men HR:s värde ligger i omdöme, integritet, relationer och rättssäker hantering.</p><div class="grid3" style="margin-top:20px"><div class="card"><h3>1. Börja grönt</h3><p>Testa på fiktiva exempel, beslutade texter och generella mallar.</p></div><div class="card"><h3>2. Granska hårt</h3><p>Be AI skilja på fakta, antaganden och sådant som måste kontrolleras.</p></div><div class="card"><h3>3. Skydda förtroendet</h3><p>Låt inte AI ta emot känsliga HR-uppgifter eller fatta beslut om människor.</p></div></div></div></section>
+</main>
+<div class="controls"><button onclick="prevSlide()">←</button><button onclick="nextSlide()">→</button></div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+function currentIndex(){let best=0,min=Infinity;slides.forEach((s,i)=>{const d=Math.abs(s.getBoundingClientRect().top-70);if(d<min){min=d;best=i}});return best}
+function go(i){slides[Math.max(0,Math.min(slides.length-1,i))].scrollIntoView({behavior:'smooth',block:'start'})}
+function nextSlide(){go(currentIndex()+1)}function prevSlide(){go(currentIndex()-1)}
+window.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='PageDown')nextSlide();if(e.key==='ArrowLeft'||e.key==='PageUp')prevSlide()})
+window.addEventListener('scroll',()=>{const h=document.documentElement;document.getElementById('progress').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'})
+function copyPrompt(id){navigator.clipboard.writeText(document.getElementById(id).innerText).then(()=>alert('Prompt kopierad'))}
+</script>
+</body></html>
