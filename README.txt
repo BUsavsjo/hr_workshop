@@ -9,6 +9,16 @@ Innehåll:
 - bilder/hr_guidance_med_ai_och_etik.png = alternativ bild om säkra val med 80/20-regeln
 - bilder/80_20_regeln_för_hr_och_ai.png = separat bild om 80/20-regeln
 
+GitHub Pages
+------------
+Startsidan för GitHub Pages är index.html.
+
+Publicera från GitHub:
+1. Gå till repository Settings > Pages.
+2. Välj Deploy from a branch.
+3. Välj branch main och folder /root.
+4. Spara. Sidan blir tillgänglig på GitHub Pages-länken när bygget är klart.
+
 Tips:
 - Använd PNG-bilderna direkt på hemsidan.
 - Om du vill kan jag också uppdatera HTML-sidan så att dessa bilder redan är inlagda på rätt ställen.
